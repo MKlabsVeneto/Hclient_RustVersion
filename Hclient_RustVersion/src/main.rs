@@ -22,6 +22,23 @@ fn main() {
     println!();
     println!("some features only work on linux and its recommended to run Hclient as root or some feature will not work!");
     println!();
-    println!("slect an option:  = passgen, 2 = btcadressgen, 3 = cardnumbergen, 4 = nmap local ip scan, 5 =  system information, 6 = pkg updater");
+    println!("slect an option: 1 = passgen, 2 = btcadressgen, 3 = cardnumbergen, 4 = nmap local ip scan, 5 =  system information, 6 = pkg updater");
     println!();    
+    let mut user_firstPrompt_choice: String = String::new();
+    io::stdin().read_line(&mut user_firstPrompt_choice);
+    // PASSGEN
+    if user_firstPrompt_choice == "1" {
+        let pgletters: &str = "qwertyuiopasdfghjklzxcvbnm";
+        let pglettersandnumbers: &str = "qwertyuiopasdfghjklzxcvbnm1234567890";
+        //PASSGEN - TYPE OF PASSWORDS
+        println!("what type of passwords do you want to generate? 1 = numbers only, 2 = letters only, 3 = numbers and letters");
+        println!();
+        let mut user_passgen_choice: String = String::new();
+        io::stdin().read_line(&mut user_passgen_choice);
+        //PASSGEN - NUMBER OF PASSWORDS
+        println!("how many passwords do you want to generate?");
+        println!();
+        let mut user_passgen_password_number_choice: String = String::new();
+        io::stdin().read_line(&mut user_passgen_password_number_choice);
+    }
 }
