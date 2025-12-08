@@ -3,6 +3,7 @@
 // CRATES
 use std::io;
 use rand::prelude::*;
+use std::process::Command;
 
 // MAIN
 fn main() {
@@ -22,7 +23,7 @@ fn main() {
     println!("   /        /   /        / /   /       /   /      /   / /   /____   /      | /   /      /   /                 official website:");
     println!("  /        /   /        / /   /_____  /   /      /   / /    ____/  /   /|  |/   /      /   /                  officialmklabsveneto.netlify.app");
     println!(" /        /   /        / /         / /   /____  /   / /    /____  /   / |      /      /   /");
-    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 1.0 APP");
+    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 0.0.1 ALPHA");
     println!();
     println!("                                           Rust Version");
     println!("-------------------------------------------------------------------------------------------------------------------------------------------------");
@@ -203,4 +204,63 @@ fn main() {
             }
         }
     }
+    
+    // NMAP LOCAL IP SCAN
+    else if user_first_prompt_choice_f == 4 {
+        let mut _final_ip = "192.168";
+        println!("enter target local ip. example: 192.168.0.1");
+        println!();
+        let mut user_target_ip = String::new();
+        io::stdin().read_line(&mut user_target_ip).expect("failed to read line");
+        println!();
+        Command::new("sh").arg("nmap -sS");
+    }
+
+    // SYSTEM INFORMATION
+    else if user_first_prompt_choice_f == 5 {
+        println!("select fetch type: 1 = neofetch, 2 = fastfetch, 3 = macchina, 4 = hyfetch");
+        println!();
+        let mut user_fetch_type = String::new();
+        io::stdin().read_line(&mut user_fetch_type).expect("failed to read line");
+        let _user_fetch_type_f: i32 = user_fetch_type.trim().parse().unwrap();
+        println!();
+        if _user_fetch_type_f == 1 {
+            Command::new("sh").arg("neofetch").output().expect("failed to execute command");
+        }
+        else if _user_fetch_type_f == 2 {
+            Command::new("sh").arg("fastfetch").output().expect("failed to execute command");
+        }
+        else if _user_fetch_type_f == 3 {
+            Command::new("sh").arg("macchina").output().expect("failed to execute command");
+        } 
+        else if _user_fetch_type_f == 4 {
+            Command::new("sh").arg("hyfetch").output().expect("failed to execute command");
+        }
+    }
+    
+    // PACKAGE UPDATER
+    else if user_first_prompt_choice_f == 6 {
+        println!("select package manager: 1 = apt, 2 = dnf, 3 = pacman");
+        println!();
+        let mut user_package_manager = String::new();
+        io::stdin().read_line(&mut user_package_manager).expect("failed to read line");
+        let user_package_manager_f: i32 = user_package_manager.trim().parse().unwrap();
+        
+        // PACKAGE UPDATER - DEBIAN
+        if user_package_manager_f == 1 {
+            Command::new("sh").arg("sudo apt update && upgrade");
+        }
+        
+        // PACKAGE UPDATER - FEDORA
+        else if user_package_manager_f == 2 {
+            Command::new("sh").arg("sudo dnf update");
+        }
+        
+        // PACKAGE UPDATER - ARCH
+        else if user_package_manager_f == 3 {
+            Command::new("sh").arg("sudo pacman -Syu");
+        }
+    }
+    let mut end = String::new();
+    io::stdin().read_line(&mut end).expect("failed to read line");
 }
