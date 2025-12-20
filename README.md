@@ -6,3 +6,4 @@ Hclient: a CLI multitool app developed by the MK labs developer team, please do 
 requirements: linux or unix like/based systems (for some features), a fetch type like neofetch/fastfetch/macchina/hyfetch installed and nmap installed
 
 changelog: Hclient Rust Version is now under development.
+           Hclient Rust Version 1.0.0 APP is out now! but with a sad new: for now cardnumbergen will not be avaible since it goes beyond my current skills but i will develop it soon.
