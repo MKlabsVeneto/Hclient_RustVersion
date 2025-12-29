@@ -45,7 +45,7 @@ fn main() {
         println!();
         let mut user_passgen_choice: String = String::new();
         io::stdin().read_line(&mut user_passgen_choice).expect("failed to read line");
-        let _user_passgen_choice_f: i32 = user_passgen_choice.trim().parse().unwrap();
+        let user_passgen_choice_f: i32 = user_passgen_choice.trim().parse().unwrap();
         
         // PASSGEN - NUMBER OF PASSWORDS
         println!();
@@ -53,7 +53,7 @@ fn main() {
         println!();
         let mut user_passgen_password_number_choice = String::new();
         io::stdin().read_line(&mut user_passgen_password_number_choice).expect("failed to read input");
-        let _user_passgen_password_number_choice_f: i32 = user_passgen_password_number_choice.trim().parse().unwrap();
+        let user_passgen_password_number_choice_f: i32 = user_passgen_password_number_choice.trim().parse().unwrap();
         println!();
         
         // PASSGEN - LENGTH OF PASSWORDS
@@ -65,35 +65,35 @@ fn main() {
         println!();
         
         // PASSGEN - NUMBERS ONLY
-        if _user_passgen_choice_f == 1 {
-            let mut _rng = rand::rng();
-            for _i in 0.._user_passgen_password_number_choice_f {
+        if user_passgen_choice_f == 1 {
+            let mut rng = rand::rng();
+            for _i in 0..user_passgen_password_number_choice_f {
                 for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as i32);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as i32);
                 }
                 println!();
             }
         }
         
         // PASSGEN - LETTERS ONLY
-        else if _user_passgen_choice_f == 2 {
-            let mut _rng = rand::rng();
+        else if user_passgen_choice_f == 2 {
+            let mut rng = rand::rng();
             println!();
-            for _i in 0.._user_passgen_password_number_choice_f {
+            for _i in 0..user_passgen_password_number_choice_f {
                 for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
+                    print!("{}", rng.sample(rand::distr::Alphabetic) as char);
                 }
                 println!();
             }
         }
         
         // PASSGEN - NUMBERS AND LETTERS
-        else if _user_passgen_choice_f == 3 {
-            let mut _rng = rand::rng();
+        else if user_passgen_choice_f == 3 {
+            let mut rng = rand::rng();
             println!();
-            for _i in 0.._user_passgen_password_number_choice_f {
+            for _i in 0..user_passgen_password_number_choice_f {
                 for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -106,10 +106,10 @@ fn main() {
         // BTCADDRESSGEN - NUMBER OF ADDRESSES
         println!("how many adresses do you want to generate?");
         println!();
-        let mut _user_btcaddressgen_password_number_choice = String::new();
-        io::stdin().read_line(&mut _user_btcaddressgen_password_number_choice).expect("failed to read line");
-        let _user_btcaddressgen_password_number_choice_f: i32 = _user_btcaddressgen_password_number_choice.trim().parse().unwrap();
-        let mut _rng = rand::rng();
+        let mut user_btcaddressgen_password_number_choice = String::new();
+        io::stdin().read_line(&mut user_btcaddressgen_password_number_choice).expect("failed to read line");
+        let user_btcaddressgen_password_number_choice_f: i32 = user_btcaddressgen_password_number_choice.trim().parse().unwrap();
+        let mut rng = rand::rng();
         println!();
         
         // BTCADDRESSGEN - ADDRESS TYPE
@@ -122,10 +122,10 @@ fn main() {
         
         // BTCADDRESSGEN - LEGACY (P2PKH)
         if user_bitcoin_type_choice_f == 1 {
-            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+            for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("1");
                 for _ in 0..=33 {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -133,10 +133,10 @@ fn main() {
         
         // BTCADDRESSGEN - P2SH
         if user_bitcoin_type_choice_f == 2 {
-            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+            for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("3");
                 for _ in 0..=33 {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -144,10 +144,10 @@ fn main() {
         
         // BTCADDRESSGEN - BECH32 (P2WPKH)
         if user_bitcoin_type_choice_f == 3 {
-            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+            for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("bc1q");
                 for _ in 0..=38 {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -155,10 +155,10 @@ fn main() {
         
         // BTCADDRESSGEN - BECH32 (P2WSH)
         if user_bitcoin_type_choice_f == 4 {
-            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+            for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("bc1q");
                 for _ in 0..=58 {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -166,10 +166,10 @@ fn main() {
         
         // BTCADDRESSGEN - TAPROOT
         if user_bitcoin_type_choice_f == 5 {
-            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+            for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("bc1p");
                 for _ in 0..58 {
-                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
                 }
                 println!();
             }
@@ -228,11 +228,11 @@ fn main() {
         println!();
         let mut user_fetch_type = String::new();
         io::stdin().read_line(&mut user_fetch_type).expect("failed to read line");
-        let _user_fetch_type_f: i32 = user_fetch_type.trim().parse().unwrap();
+        let user_fetch_type_f: i32 = user_fetch_type.trim().parse().unwrap();
         println!();
         
         // SYSTEM INFORMATION - NEOFETCH
-        if _user_fetch_type_f == 1 {
+        if user_fetch_type_f == 1 {
             let mut sh = Command::new("sh");
             sh.arg("neofetch.sh");
             match sh.output() {
@@ -248,7 +248,7 @@ fn main() {
         }
         
         // SYSTEM INFORMATION - FASTFETCH
-        else if _user_fetch_type_f == 2 {
+        else if user_fetch_type_f == 2 {
             let mut sh = Command::new("sh");
             sh.arg("fastfetch.sh");
             match sh.output() {
@@ -264,7 +264,7 @@ fn main() {
         }
         
         // SYSTEM INFORMATION - MACCHINA
-        else if _user_fetch_type_f == 3 {
+        else if user_fetch_type_f == 3 {
             let mut sh = Command::new("sh");
             sh.arg("macchina.sh");
             match sh.output() {
@@ -280,7 +280,7 @@ fn main() {
         } 
         
         // SYSTEM INFORMATION - HYFETCH
-        else if _user_fetch_type_f == 4 {
+        else if user_fetch_type_f == 4 {
             let mut sh = Command::new("sh");
             sh.arg("hyfetch.sh");
             match sh.output() {
