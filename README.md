@@ -8,5 +8,6 @@ requirements: linux or unix like/based systems (for some features), a fetch type
 changelog: Hclient Rust Version is now under development.
            Hclient Rust Version 1.0.0 APP is out now! but with a sad new: for now cardnumbergen will not be avaible since it goes beyond my      current skills but i will develop it soon.
             Hclient 1.1.0:
-                added 5 more features to btcaddressgen feature
+                added 5 more features to the btcaddressgen feature
+                added 1 more feature to the passgen feature
                 lightened and simplyfied the code
