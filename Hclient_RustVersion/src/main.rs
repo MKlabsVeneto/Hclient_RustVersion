@@ -23,9 +23,9 @@ fn main() {
     println!("   /        /   /        / /   /       /   /      /   / /   /____   /      | /   /      /   /                 official website:");
     println!("  /        /   /        / /   /_____  /   /      /   / /    ____/  /   /|  |/   /      /   /                  officialmklabsveneto.netlify.app");
     println!(" /        /   /        / /         / /   /____  /   / /    /____  /   / |      /      /   /");
-    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 1.0.0 APP");
+    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 1.1.0 APP");
     println!();
-    println!("                                           Rust Version");
+    println!("                                        ---|Rust Version|---");
     println!("-------------------------------------------------------------------------------------------------------------------------------------------------");
     println!();
     println!("NOTE: some features only work on linux!");
@@ -54,16 +54,24 @@ fn main() {
         let mut user_passgen_password_number_choice = String::new();
         io::stdin().read_line(&mut user_passgen_password_number_choice).expect("failed to read input");
         let _user_passgen_password_number_choice_f: i32 = user_passgen_password_number_choice.trim().parse().unwrap();
+        println!();
+        
+        // PASSGEN - LENGTH OF PASSWORDS
+        println!("how long do you want them to be?");
+        println!();
+        let mut user_passgen_password_lenght_choice = String::new();
+        io::stdin().read_line(&mut user_passgen_password_lenght_choice).expect("failed to read line");
+        let user_passgen_password_lenght_choice_f = user_passgen_password_lenght_choice.trim().parse().unwrap();
+        println!();
         
         // PASSGEN - NUMBERS ONLY
         if _user_passgen_choice_f == 1 {
             let mut _rng = rand::rng();
-            println!();
             for _i in 0.._user_passgen_password_number_choice_f {
-                print!("---|{}", _rng.sample(rand::distr::Alphanumeric) as i128);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as i128);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as i128);
-                println!("{}|---", _rng.sample(rand::distr::Alphanumeric) as i128);
+                for _ in 0..user_passgen_password_lenght_choice_f {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as i32);
+                }
+                println!();
             }
         }
         
@@ -72,16 +80,10 @@ fn main() {
             let mut _rng = rand::rng();
             println!();
             for _i in 0.._user_passgen_password_number_choice_f {
-                print!("---|{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-                println!("{}|---", _rng.sample(rand::distr::Alphabetic) as char);
+                for _ in 0..user_passgen_password_lenght_choice_f {
+                    print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
+                }
+                println!();
             }
         }
         
@@ -90,23 +92,18 @@ fn main() {
             let mut _rng = rand::rng();
             println!();
             for _i in 0.._user_passgen_password_number_choice_f {
-                print!("---|{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
-                println!("{}|---", _rng.sample(rand::distr::Alphanumeric) as char);
+                for _ in 0..user_passgen_password_lenght_choice_f {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
             }
         }
     }
     
     // BTCADDRESSGEN
     else if user_first_prompt_choice_f == 2 {
+        
+        // BTCADDRESSGEN - NUMBER OF ADDRESSES
         println!("how many adresses do you want to generate?");
         println!();
         let mut _user_btcaddressgen_password_number_choice = String::new();
@@ -114,81 +111,83 @@ fn main() {
         let _user_btcaddressgen_password_number_choice_f: i32 = _user_btcaddressgen_password_number_choice.trim().parse().unwrap();
         let mut _rng = rand::rng();
         println!();
-        for _i in 0.._user_btcaddressgen_password_number_choice_f {
-            print!("---|{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            print!("{}", _rng.sample(rand::distr::Alphabetic) as char);
-            println!("{}|---", _rng.sample(rand::distr::Alphabetic) as char);
+        
+        // BTCADDRESSGEN - ADDRESS TYPE
+        println!("what type do you wanna use? 1 = Legacy (P2PKH), 2 = P2SH, 3 = Bech32 (P2WPKH), 4 = Bech32 (P2WSH), 5 = Taproot");
+        println!();
+        let mut user_bitcoin_type_choice = String::new();
+        io::stdin().read_line(&mut user_bitcoin_type_choice).expect("failed to read line");
+        let user_bitcoin_type_choice_f:i32 = user_bitcoin_type_choice.trim().parse().unwrap();
+        println!();
+        
+        // BTCADDRESSGEN - LEGACY (P2PKH)
+        if user_bitcoin_type_choice_f == 1 {
+            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+                print!("1");
+                for _ in 0..=33 {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
+            }
+        }
+        
+        // BTCADDRESSGEN - P2SH
+        if user_bitcoin_type_choice_f == 2 {
+            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+                print!("3");
+                for _ in 0..=33 {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
+            }
+        }
+        
+        // BTCADDRESSGEN - BECH32 (P2WPKH)
+        if user_bitcoin_type_choice_f == 3 {
+            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+                print!("bc1q");
+                for _ in 0..=38 {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
+            }
+        }
+        
+        // BTCADDRESSGEN - BECH32 (P2WSH)
+        if user_bitcoin_type_choice_f == 4 {
+            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+                print!("bc1q");
+                for _ in 0..=58 {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
+            }
+        }
+        
+        // BTCADDRESSGEN - TAPROOT
+        if user_bitcoin_type_choice_f == 5 {
+            for _i in 0.._user_btcaddressgen_password_number_choice_f {
+                print!("bc1p");
+                for _ in 0..58 {
+                    print!("{}", _rng.sample(rand::distr::Alphanumeric) as char);
+                }
+                println!();
+            }
         }
     }
     
     // NMAP LOCAL IP SCAN
     else if user_first_prompt_choice_f == 3 {
+        
+        // NMAP - PORT
         println!("select port: 1 = 24, 2 = 16 (the port 16 takes longer to scan than the port 24");
         println!();
         let mut user_nmap_port_selection = String::new();
         io::stdin().read_line(&mut user_nmap_port_selection).expect("failed to read line");
         let user_nmap_port_selection_f:i32 = user_nmap_port_selection.trim().parse().unwrap();
         println!();
+        
+        // NMAP - PORT 24
         if user_nmap_port_selection_f == 1 {
             let mut sh = Command::new("sh");
             sh.arg("nmap24.sh");
@@ -203,6 +202,8 @@ fn main() {
                 }
             }
         }
+        
+        // NMAP - PORT 16
         else if user_nmap_port_selection_f == 2 {
             let mut sh = Command::new("sh");
             sh.arg("nmap16.sh");
@@ -221,12 +222,16 @@ fn main() {
 
     // SYSTEM INFORMATION
     else if user_first_prompt_choice_f == 4 {
+        
+        // SYSTEM INFORMATION - FETCH TYPE
         println!("select fetch type: 1 = neofetch, 2 = fastfetch, 3 = macchina, 4 = hyfetch");
         println!();
         let mut user_fetch_type = String::new();
         io::stdin().read_line(&mut user_fetch_type).expect("failed to read line");
         let _user_fetch_type_f: i32 = user_fetch_type.trim().parse().unwrap();
         println!();
+        
+        // SYSTEM INFORMATION - NEOFETCH
         if _user_fetch_type_f == 1 {
             let mut sh = Command::new("sh");
             sh.arg("neofetch.sh");
@@ -241,6 +246,8 @@ fn main() {
                 }
             }
         }
+        
+        // SYSTEM INFORMATION - FASTFETCH
         else if _user_fetch_type_f == 2 {
             let mut sh = Command::new("sh");
             sh.arg("fastfetch.sh");
@@ -255,6 +262,8 @@ fn main() {
                 }
             }
         }
+        
+        // SYSTEM INFORMATION - MACCHINA
         else if _user_fetch_type_f == 3 {
             let mut sh = Command::new("sh");
             sh.arg("macchina.sh");
@@ -269,6 +278,8 @@ fn main() {
                 }
             }
         } 
+        
+        // SYSTEM INFORMATION - HYFETCH
         else if _user_fetch_type_f == 4 {
             let mut sh = Command::new("sh");
             sh.arg("hyfetch.sh");
@@ -287,6 +298,8 @@ fn main() {
     
     // PACKAGE UPDATER
     else if user_first_prompt_choice_f == 5 {
+        
+        // PACKAGE UPDATER - PACKAGE MANAGER
         println!("select package manager: 1 = apt, 2 = dnf, 3 = pacman");
         println!();
         let mut user_package_manager = String::new();
@@ -342,6 +355,8 @@ fn main() {
             }
         }
     }
+    
+    // END
     println!();
     println!("press ENTER to exit");
     let mut end = String::new();
