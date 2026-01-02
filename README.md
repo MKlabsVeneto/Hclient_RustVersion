@@ -15,4 +15,5 @@ changelog: Hclient Rust Version is now under development.
                 added the missing feature: cardnumbergen
                 refined cardnumbergen to be more precise on card types and formatting
                 switched from rand 0.9.2 to rand 0.8 since it's more easy, reliable and simpler to read
-                refined btcaddressgen to be more precise on address types and formatting.
+                refined btcaddressgen to be more precise on address types and formatting
+                the Windows version will releasing one week after this release (or less i hope) cuz im on vacation and currently does not have my Windows pc here. for now, this version is not gonna be published as a github release yet.
