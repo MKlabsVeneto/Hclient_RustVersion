@@ -1,1 +1,1 @@
-clear && neofetch
+neofetch

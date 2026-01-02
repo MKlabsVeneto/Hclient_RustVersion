@@ -11,3 +11,8 @@ changelog: Hclient Rust Version is now under development.
                 added 5 more features to the btcaddressgen feature
                 added 1 more feature to the passgen feature
                 lightened and simplyfied the code
+            Hclient 1.2.0:
+                added the missing feature: cardnumbergen
+                refined cardnumbergen to be more precise on card types and formatting
+                switched from rand 0.9.2 to rand 0.8 since it's more easy, reliable and simpler to read
+                refined btcaddressgen to be more precise on address types and formatting.

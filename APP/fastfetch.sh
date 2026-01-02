@@ -1,1 +1,1 @@
-clear && fastfetch
+fastfetch

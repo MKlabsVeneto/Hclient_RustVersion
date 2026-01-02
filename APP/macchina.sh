@@ -1,1 +1,1 @@
-clear && macchina
+macchina

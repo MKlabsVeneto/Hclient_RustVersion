@@ -2,16 +2,16 @@
 // LICENSE: distribuited on the GNU general public license 3.0v license
 // CRATES
 use std::io;
-use rand::prelude::*;
+use rand::Rng;
 use std::process::Command;
 
-// MAIN
+// MAIN CODE
 fn main() {
     
     // LOGO, CREDITS AND FIST PROMPT
     println!("Hclient Rust Edition, a CLI multi tool rust program for general tech purposes.    Copyright (C) 2025  Kevin De Togni, MKlabs");
     println!("distribuited on the GNU general public license 3.0v license");
-    println!("-------------------------------------------------------------------------------------------------------------------------------------------------");
+    println!("------------------------------------------------------------------------------------------------------------------------------------------------");
     println!();
     println!("          _________    _________");
     println!("         /        /   /        /");
@@ -23,14 +23,14 @@ fn main() {
     println!("   /        /   /        / /   /       /   /      /   / /   /____   /      | /   /      /   /                 official website:");
     println!("  /        /   /        / /   /_____  /   /      /   / /    ____/  /   /|  |/   /      /   /                  officialmklabsveneto.netlify.app");
     println!(" /        /   /        / /         / /   /____  /   / /    /____  /   / |      /      /   /");
-    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 1.1.0 APP");
+    println!("/________/   /_______ / /_________/ /________/ /___/ /_________/ /___/  |_____/      /___/                    version: 1.2.0 APP");
     println!();
     println!("                                        ---|Rust Version|---");
-    println!("-------------------------------------------------------------------------------------------------------------------------------------------------");
+    println!("------------------------------------------------------------------------------------------------------------------------------------------------");
     println!();
     println!("NOTE: some features only work on linux!");
     println!();
-    println!("select an option: 1 = passgen, 2 = btcadressgen, 3 = nmap local ip scan, 4 = system information, 5 = pkg updater");
+    println!("select an option: 1 = passgen, 2 = btcadressgen, 3 = cardnumbergen, 4 = nmap local ip scan, 5 = system information, 6 = pkg updater");
     println!();    
     let mut user_first_prompt_choice = String::new();
     io::stdin().read_line(&mut user_first_prompt_choice).expect("failed to read line");
@@ -66,10 +66,10 @@ fn main() {
         
         // PASSGEN - NUMBERS ONLY
         if user_passgen_choice_f == 1 {
-            let mut rng = rand::rng();
             for _i in 0..user_passgen_password_number_choice_f {
                 for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as i32);
+                    let  rng = rand::thread_rng().gen_range(0..=9);
+                    print!("{}", rng);
                 }
                 println!();
             }
@@ -77,25 +77,31 @@ fn main() {
         
         // PASSGEN - LETTERS ONLY
         else if user_passgen_choice_f == 2 {
-            let mut rng = rand::rng();
+            let letters = b"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
+            let  mut rng = rand::thread_rng();
             println!();
             for _i in 0..user_passgen_password_number_choice_f {
-                for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", rng.sample(rand::distr::Alphabetic) as char);
-                }
-                println!();
+                let password_letters_only: String = (0..user_passgen_password_lenght_choice_f).map(|_| {
+                    let idx = rng.gen_range(0..letters.len());
+                    letters[idx] as char
+                })
+                .collect();
+                println!("{}", password_letters_only);
             }
         }
         
         // PASSGEN - NUMBERS AND LETTERS
         else if user_passgen_choice_f == 3 {
-            let mut rng = rand::rng();
+            let letters_and_numbers = b"qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890";
+            let mut rng = rand::thread_rng();
             println!();
             for _i in 0..user_passgen_password_number_choice_f {
-                for _ in 0..user_passgen_password_lenght_choice_f {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
-                println!();
+                let password_letters_and_numbers: String = (0..user_passgen_password_lenght_choice_f).map(|_| {
+                    let idx = rng.gen_range(0..letters_and_numbers.len());
+                    letters_and_numbers[idx] as char
+                })
+                .collect();
+                println!("{}", password_letters_and_numbers);
             }
         }
     }
@@ -109,11 +115,13 @@ fn main() {
         let mut user_btcaddressgen_password_number_choice = String::new();
         io::stdin().read_line(&mut user_btcaddressgen_password_number_choice).expect("failed to read line");
         let user_btcaddressgen_password_number_choice_f: i32 = user_btcaddressgen_password_number_choice.trim().parse().unwrap();
-        let mut rng = rand::rng();
+        let mut rng = rand::thread_rng();
         println!();
         
         // BTCADDRESSGEN - ADDRESS TYPE
-        println!("what type do you wanna use? 1 = Legacy (P2PKH), 2 = P2SH, 3 = Bech32 (P2WPKH), 4 = Bech32 (P2WSH), 5 = Taproot");
+        let characters_base58 = b"123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz";
+        let characters_bech32 = b"qpzry9x8gf2tvdw0s3jn54khce6mua7l";
+        println!("what type do you wanna use? 1 = Legacy (P2PKH), 2 = P2SH, 3 = Bech32 (P2WPKH), 4 = Bech32 (P2WSH), 5 = Bech32m (Taproot)");
         println!();
         let mut user_bitcoin_type_choice = String::new();
         io::stdin().read_line(&mut user_bitcoin_type_choice).expect("failed to read line");
@@ -124,10 +132,12 @@ fn main() {
         if user_bitcoin_type_choice_f == 1 {
             for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("1");
-                for _ in 0..=33 {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
-                println!();
+                let random_adddres_base58: String = (0..=34).map(|_| {
+                    let idx = rng.gen_range(0..characters_base58.len());
+                    characters_base58[idx] as char
+                })
+                .collect();
+                println!("{}", random_adddres_base58);
             }
         }
         
@@ -135,49 +145,133 @@ fn main() {
         if user_bitcoin_type_choice_f == 2 {
             for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("3");
-                for _ in 0..=33 {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
-                println!();
+                let random_adddres_base58: String = (0..=34).map(|_| {
+                    let idx = rng.gen_range(0..characters_base58.len());
+                    characters_base58[idx] as char
+                })
+                .collect();
+                println!("{}", random_adddres_base58);
             }
         }
         
         // BTCADDRESSGEN - BECH32 (P2WPKH)
         if user_bitcoin_type_choice_f == 3 {
             for _i in 0..user_btcaddressgen_password_number_choice_f {
-                print!("bc1q");
-                for _ in 0..=38 {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
-                println!();
+                print!("bc1");
+                let random_adddres_bech32: String = (0..=39).map(|_| {
+                    let idx = rng.gen_range(0..characters_bech32.len());
+                    characters_bech32[idx] as char
+                })
+                .collect();
+                println!("{}", random_adddres_bech32);
             }
         }
         
         // BTCADDRESSGEN - BECH32 (P2WSH)
         if user_bitcoin_type_choice_f == 4 {
             for _i in 0..user_btcaddressgen_password_number_choice_f {
-                print!("bc1q");
-                for _ in 0..=58 {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
-                println!();
+                print!("bc1");
+                let random_adddres_bech32: String = (0..=59).map(|_| {
+                    let idx = rng.gen_range(0..characters_bech32.len());
+                    characters_bech32[idx] as char
+                })
+                .collect();
+                println!("{}", random_adddres_bech32);
             }
         }
         
-        // BTCADDRESSGEN - TAPROOT
+        // BTCADDRESSGEN - BECH32M (TAPROOT)
         if user_bitcoin_type_choice_f == 5 {
             for _i in 0..user_btcaddressgen_password_number_choice_f {
                 print!("bc1p");
-                for _ in 0..58 {
-                    print!("{}", rng.sample(rand::distr::Alphanumeric) as char);
-                }
+                let random_adddres_bech32: String = (0..=58).map(|_| {
+                    let idx = rng.gen_range(0..characters_bech32.len());
+                    characters_bech32[idx] as char
+                })
+                .collect();
+                println!("{}", random_adddres_bech32);
+            }
+        }
+    }
+    
+    // CARDNUMBERGEN (in develpment)
+    else if user_first_prompt_choice_f == 3 {
+        let cardnumbergen_card_number_1 = rand::thread_rng().gen_range(000..999);
+        let cardnumbergen_card_number_2 = rand::thread_rng().gen_range(0000..9999);
+        let cardnumbergen_card_number_3 = rand::thread_rng().gen_range(0000..9999);
+        let cardnumbergen_card_number_4 = rand::thread_rng().gen_range(0000..9999);
+        let cardnumbergen_card_expiration_month = rand::thread_rng().gen_range(01..=12);
+        let cardnumbergen_card_expiration_year = rand::thread_rng().gen_range(2026..2036);
+        let cardnumbergen_card_cvv = rand::thread_rng().gen_range(000..=999);
+        let mastercard_number_1 = rand::thread_rng().gen_range(2221..2720);
+        let american_express_number_1 = rand::thread_rng().gen_range(00..99);
+        let american_express_number_2 = rand::thread_rng().gen_range(000000..999999);
+        let american_express_number_3 = rand::thread_rng().gen_range(00000..99999);
+        
+        // CARDNUMBERGEN - CARD TYPE
+        println!("enter card to generate: 1 = Visa, 2 = Mastercard, 3 = American Express.");
+        println!();
+        let mut user_card_type = String::new();
+        io::stdin().read_line(&mut user_card_type).expect("failed to read line");
+        let user_card_type_f:i32 = user_card_type.trim().parse().unwrap();
+        println!();
+        
+        // CARDNUMBERGEN - NUMBER OF GENERATED CARDS
+        println!("how many cards do you wanna generate?");
+        println!();
+        let mut cardnumbergen_number_of_cards = String::new();
+        io::stdin().read_line(&mut cardnumbergen_number_of_cards).expect("failed to read line");
+        let cardnumbergen_number_of_cards_f:i32 = cardnumbergen_number_of_cards.trim().parse().unwrap();
+        println!();
+        if user_card_type_f == 1 {
+            for _i in 0..cardnumbergen_number_of_cards_f {
+            
+                // CARDNUMBERGEN - VISA
+                println!("--------------------------------");
+                println!("Visa");
                 println!();
+                println!("card number: 4{}-{}-{}-{}", cardnumbergen_card_number_1, cardnumbergen_card_number_2, cardnumbergen_card_number_3, cardnumbergen_card_number_4 );
+                println!();
+                println!("expirarion date: {}/{}", cardnumbergen_card_expiration_month, cardnumbergen_card_expiration_year);
+                println!();
+                println!("cvv: {}", cardnumbergen_card_cvv);
+                println!("--------------------------------");
+            }
+        }
+        else if user_card_type_f == 2 {
+            for _i in 0..cardnumbergen_number_of_cards_f {
+                
+                // CARDNUMBERGEN - MASTERCARD
+                println!("--------------------------------");
+                println!("MasterCard");
+                println!();
+                println!("card number: {}-{}-{}-{}", mastercard_number_1, cardnumbergen_card_number_2, cardnumbergen_card_number_3, cardnumbergen_card_number_4);
+                println!();
+                println!("expiration date: {}/{}", cardnumbergen_card_expiration_month, cardnumbergen_card_expiration_year);
+                println!();
+                println!("cvv: {}", cardnumbergen_card_cvv);
+                println!("--------------------------------");
+            }
+        }
+        else if user_card_type_f == 3 {
+            for _i in 0..cardnumbergen_number_of_cards_f {
+                
+                // CARDNUMBERGEN - AMERICAN EXPRESS
+                println!("-------------------------------");
+                println!("American Express");
+                println!();
+                println!("card number: 37{}-{}-{}", american_express_number_1, american_express_number_2, american_express_number_3);
+                println!();
+                println!("expiration date: {}/{}", cardnumbergen_card_expiration_month, cardnumbergen_card_expiration_year);
+                println!();
+                println!("cvv: {}", cardnumbergen_card_cvv);
+                println!("-------------------------------");
             }
         }
     }
     
     // NMAP LOCAL IP SCAN
-    else if user_first_prompt_choice_f == 3 {
+    else if user_first_prompt_choice_f == 4 {
         
         // NMAP - PORT
         println!("select port: 1 = 24, 2 = 16 (the port 16 takes longer to scan than the port 24");
@@ -221,7 +315,7 @@ fn main() {
     }
 
     // SYSTEM INFORMATION
-    else if user_first_prompt_choice_f == 4 {
+    else if user_first_prompt_choice_f == 5 {
         
         // SYSTEM INFORMATION - FETCH TYPE
         println!("select fetch type: 1 = neofetch, 2 = fastfetch, 3 = macchina, 4 = hyfetch");
@@ -297,7 +391,7 @@ fn main() {
     }
     
     // PACKAGE UPDATER
-    else if user_first_prompt_choice_f == 5 {
+    else if user_first_prompt_choice_f == 6 {
         
         // PACKAGE UPDATER - PACKAGE MANAGER
         println!("select package manager: 1 = apt, 2 = dnf, 3 = pacman");

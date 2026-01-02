@@ -1,1 +1,1 @@
-clear && hyfetch
+hyfetch
